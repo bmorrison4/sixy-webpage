@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF8">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    
+</head>
+
+<body>
+    <div class="content">
+        <div class="controls">
+            <!--<button onclick="volumeUp()" id="volumeUp">Volume Up</button>
+            <button onclick="volumeDown()"id="volumeDown">Volume Down</button>-->
+            <table class="buttons">
+                <tr>
+                    <td>
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="100" value="80" class="slider" id="volumeSlider">
+                        </div>
+                    </td>
+                    <td>
+                        <button onclick="setVolume()" id="volumeButton">Set Volume</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="slidecontainer">
+                            <input type="range" min="-1.0" max="1.0" value="1" step="0.1" class="slider" id="speedSlider">
+                        </div>
+                    </td>
+                    <td>
+                        <button onclick="setSpeed()" id="speedButton">Set Speed</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="sendMessage('table on')" id="tableOnButton">Table On</button>
+                    </td>
+                    <td>
+                        <button onclick="sendMessage('table off')" id="tableOffButton">Table Off</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="sendMessage('mic unmute')" id="micOnButton">Mic On</button>
+                    </td>
+                    <td>
+                        <button onclick="sendMessage('mic mute')" id="micOffButton">Mic Off</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button onclick="sendMessage('reboot')" id="rebootButton">Reboot</button>
+                    </td>
+                </tr>
+            </table>
+            <!--<button onclick="speedUp()" id="speedUp">Speed Up</button>
+            <button onclick="speedDown()" id="speedDown">Speed Down</button>
+            <button onclick="tableMode()" id="tableMode">Table Mode</button>
+            <button onclick="toggleMic()" id="toggleMic">Toggle Mic</button>
+            <button onclick="reboot()" id="hardRestart">Hard Restart</button>
+            <button onclick="restart()" id="softRestart">Soft Restart</button>-->
+        </div>
+        <iframe src="https://www.letsrobot.tv/chat/jill" width=240 height=800></iframe>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
