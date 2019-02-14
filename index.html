@@ -18,6 +18,9 @@
                             <input type="range" min="0" max="100" value="80" step="5" class="slider" id="volumeSlider">
                         </div>
                     </td>
+                    
+                </tr>
+                <tr>
                     <td>
                         <button onclick="setVolume()" id="volumeButton">Set Volume</button>
                     </td>
@@ -28,6 +31,9 @@
                             <input type="range" min="-1.0" max="1.0" value="1" step="0.1" class="slider" id="speedSlider">
                         </div>
                     </td>
+                    
+                </tr>
+                <tr>
                     <td>
                         <button onclick="setSpeed()" id="speedButton">Set Speed</button>
                     </td>
@@ -36,6 +42,9 @@
                     <td>
                         <button onclick="sendMessage('table on')" id="tableOnButton">Table On</button>
                     </td>
+                    
+                </tr>
+                <tr>
                     <td>
                         <button onclick="sendMessage('table off')" id="tableOffButton">Table Off</button>
                     </td>
@@ -44,12 +53,15 @@
                     <td>
                         <button onclick="sendMessage('mic unmute')" id="micOnButton">Mic On</button>
                     </td>
+                    
+                </tr>
+                <tr>
                     <td>
                         <button onclick="sendMessage('mic mute')" id="micOffButton">Mic Off</button>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td>
                         <button onclick="sendMessage('reboot')" id="rebootButton">Reboot</button>
                     </td>
                 </tr>

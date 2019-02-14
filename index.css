@@ -7,18 +7,19 @@ body {
 .content {
     width: 480px;
     height: 800px;
+    border: 1px dashed red;
 }
 
 .controls {
     float: left;
-    width: 240px;
+    width: 120px;
     height: 800px;
 }
 
 iframe {
     border: none;
     float: right;
-    width: 240px;
+    width: 360px;
 }
 
 button {
@@ -43,9 +44,6 @@ table {
     min-width: max-width;
 }
 
-tr {
-    height: 160px;
-}
 
 td {
     width: 50%;
