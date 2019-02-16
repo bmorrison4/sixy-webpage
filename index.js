@@ -2,13 +2,13 @@ const socket = io.connect('wss://letsrobot.tv:8000');
 
 const volumeSlider = document.getElementById("volumeSlider");
 const speedSlider = document.getElementById("speedSlider");
-const tableButton = document.getElementById("tableMode");
-const micButton = document.getElementById("micEnable");
+const tableButton = document.getElementById("tableButton");
+const micButton = document.getElementById("micButton");
 
 let volumeSliderValue = volumeSlider.value;
 let speedSliderValue = speedSlider.value;
-let tableButtonValue = tableButton.value;
-let micButtonValue = micButton.value;
+let tableButtonValue = tableButton.checked;
+let micButtonValue = micButton.checked;
 
 console.log(volumeSliderValue);
 console.log(speedSliderValue);
@@ -27,7 +27,7 @@ function setSpeed() {
 
 function setTableMode() {
     let str = "table";
-    if (tableButton.value === true) {
+    if (tableButton.checked === true) {
         str += " on";
     } else {
         str += " off";
@@ -37,7 +37,7 @@ function setTableMode() {
 
 function setMicEnabled() {
     let str="mic";
-    if (micButton.value === true) {
+    if (micButton.checked === true) {
         str += " unmute";
     } else {
         str += " mute";
@@ -53,12 +53,12 @@ function update() {
         setSpeed();
         speedSliderValue = speedSlider.value;
     }
-    if (tableButton.value !== tableButtonValue) {
+    if (tableButton.checked !== tableButtonValue) {
         setTableMode();
-        tableButtonValue = tableButton.value;
+        tableButtonValue = tableButton.checked;
     }
-    if (micButton.value !== micButtonValue) {
-        micButtonValue = micButton.value;
+    if (micButton.checked !== micButtonValue) {
+        micButtonValue = micButton.checked;
     }
 }
 
