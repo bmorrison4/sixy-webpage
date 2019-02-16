@@ -10,19 +10,18 @@ let speedSliderValue = speedSlider.value;
 let tableButtonValue = tableButton.checked;
 let micButtonValue = micButton.checked;
 
-console.log(volumeSliderValue);
-console.log(speedSliderValue);
-console.log(tableButtonValue);
-console.log(micButtonValue);
+let commands = [];
 
 function setVolume() {
     let str = "vol " + volumeSlider.value;
-    sendMessage(str);
+    //sendMessage(str);
+    commands.push(str);
 }
 
 function setSpeed() {
     let str = "speed " + speedSlider.value;
-    sendMessage(str);
+    //sendMessage(str);
+    commands.push(str);
 }
 
 function setTableMode() {
@@ -32,7 +31,8 @@ function setTableMode() {
     } else {
         str += " off";
     }
-    sendMessage(str);
+    //sendMessage(str);
+    commands.push(str);
 }
 
 function setMicEnabled() {
@@ -42,9 +42,15 @@ function setMicEnabled() {
     } else {
         str += " mute";
     }
+    //sendMessage(str);
+    commands.push(str);
 }
 
-function update() {
+function sleep(ms){
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+async function update() {
     if (volumeSlider.value !== volumeSliderValue) {
         setVolume();
         volumeSliderValue = volumeSlider.value;
@@ -58,8 +64,18 @@ function update() {
         tableButtonValue = tableButton.checked;
     }
     if (micButton.checked !== micButtonValue) {
+        setMicEnabled();
         micButtonValue = micButton.checked;
     }
+
+    if(commands.length > 0) {
+        for(let i = 0; i < commands.length; i++) {
+            console.log("sending command " + commands[i]);
+            sendMessage(commands[i]);
+            await sleep(1000)
+        }
+    }
+    commands = [];
 }
 
 function sendMessage(message) {
