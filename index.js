@@ -1,29 +1,38 @@
-const socket = io.connect('wss://letsrobot.tv:8000');
+const socket = io.connect('wss://letsrobot.tv:8000');   // Socket.io connection
 
+// get the html objects
 const volumeSlider = document.getElementById("volumeSlider");
 const speedSlider = document.getElementById("speedSlider");
 const tableButton = document.getElementById("tableButton");
 const micButton = document.getElementById("micButton");
 
+// value of the objects when the page first loads
 let volumeSliderValue = volumeSlider.value;
 let speedSliderValue = speedSlider.value;
 let tableButtonValue = tableButton.checked;
 let micButtonValue = micButton.checked;
 
-let commands = [];
+let commands = [];  // array for the command queue.
 
+/**
+ * Get the value of the slider and add it to the command queue.
+ */
 function setVolume() {
     let str = "vol " + volumeSlider.value;
-    //sendMessage(str);
     commands.push(str);
 }
 
+/**
+ * Get the value of the slider and add it to the command queue.
+ */
 function setSpeed() {
     let str = "speed " + speedSlider.value;
-    //sendMessage(str);
     commands.push(str);
 }
 
+/**
+ * Get the value of the table button and add it to the command queue.
+ */
 function setTableMode() {
     let str = "table";
     if (tableButton.checked === true) {
@@ -31,10 +40,12 @@ function setTableMode() {
     } else {
         str += " off";
     }
-    //sendMessage(str);
     commands.push(str);
 }
 
+/**
+ * Get the value of the mic button and add it to the command queue.
+ */
 function setMicEnabled() {
     let str="mic";
     if (micButton.checked === true) {
@@ -42,14 +53,22 @@ function setMicEnabled() {
     } else {
         str += " mute";
     }
-    //sendMessage(str);
     commands.push(str);
 }
 
+/**
+ * dummy delay function
+ * @param {Number} ms milliseconds to delay 
+ */
 function sleep(ms){
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
+/**
+ * Check values of the objects on the webpage against stored values for deltas
+ * and update accordingly. Iterate through updated values and send the commands
+ * to the chat.
+ */
 async function update() {
     if (volumeSlider.value !== volumeSliderValue) {
         setVolume();
@@ -70,7 +89,6 @@ async function update() {
 
     if(commands.length > 0) {
         for(let i = 0; i < commands.length; i++) {
-            console.log("sending command " + commands[i]);
             sendMessage(commands[i]);
             await sleep(1000)
         }
@@ -78,6 +96,10 @@ async function update() {
     commands = [];
 }
 
+/**
+ * Send a message to the chat.
+ * @param {String} message 
+ */
 function sendMessage(message) {
     socket.emit("chat_message", {
         "message": "[sixy] ." + message,
