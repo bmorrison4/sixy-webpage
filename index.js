@@ -1,4 +1,4 @@
-const socket = io.connect('wss://letsrobot.tv:8000');   // Socket.io connection
+const socket = io.connect('wss://letsrobot.tv:8000'); // Socket.io connection
 
 // get the html objects
 const volumeSlider = document.getElementById("volumeSlider");
@@ -12,7 +12,7 @@ let speedSliderValue = speedSlider.value;
 let tableButtonValue = tableButton.checked;
 let micButtonValue = micButton.checked;
 
-let commands = [];  // array for the command queue.
+let commands = []; // array for the command queue.
 
 /**
  * Get the value of the slider and add it to the command queue.
@@ -47,7 +47,7 @@ function setTableMode() {
  * Get the value of the mic button and add it to the command queue.
  */
 function setMicEnabled() {
-    let str="mic";
+    let str = "mic";
     if (micButton.checked === true) {
         str += " unmute";
     } else {
@@ -60,7 +60,7 @@ function setMicEnabled() {
  * dummy delay function
  * @param {Number} ms milliseconds to delay 
  */
-function sleep(ms){
+function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
@@ -87,8 +87,8 @@ async function update() {
         micButtonValue = micButton.checked;
     }
 
-    if(commands.length > 0) {
-        for(let i = 0; i < commands.length; i++) {
+    if (commands.length > 0) {
+        for (let i = 0; i < commands.length; i++) {
             sendMessage(commands[i]);
             await sleep(1000)
         }
