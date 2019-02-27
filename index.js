@@ -56,6 +56,13 @@ function setMicEnabled() {
     commands.push(str);
 }
 
+function reboot() {
+    derp = confirm("Are you sure you want to reboot?");
+    if (derp) {
+        sendMessage("reboot");
+    }
+}
+
 /**
  * dummy delay function
  * @param {Number} ms milliseconds to delay 
