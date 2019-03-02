@@ -1,18 +1,22 @@
-const socket = io.connect('wss://letsrobot.tv:8000'); // Socket.io connection
-
 // get the html objects
 const volumeSlider = document.getElementById("volumeSlider");
 const speedSlider = document.getElementById("speedSlider");
 const tableButton = document.getElementById("tableButton");
 const micButton = document.getElementById("micButton");
-
 // value of the objects when the page first loads
 let volumeSliderValue = volumeSlider.value;
 let speedSliderValue = speedSlider.value;
 let tableButtonValue = tableButton.checked;
 let micButtonValue = micButton.checked;
-
-let commands = []; // array for the command queue.
+// values of various objects are placed here for easy manipulation
+const server = 'wss://letsrobot.tv';
+const port = '8000';
+const sleepTime = '1000';
+const robotName = 'sixy';
+const robotID = '80459902';
+const chatRoom = 'jill';
+let commands = []; // array for the command queue
+const socket = io.connect(server + ':' + port); // Socket.io connection
 
 /**
  * Get the value of the slider and add it to the command queue.
@@ -97,7 +101,7 @@ async function update() {
     if (commands.length > 0) {
         for (let i = 0; i < commands.length; i++) {
             sendMessage(commands[i]);
-            await sleep(1000)
+            await sleep(sleepTime)
         }
     }
     commands = [];
@@ -109,10 +113,10 @@ async function update() {
  */
 function sendMessage(message) {
     socket.emit("chat_message", {
-        "message": "[sixy] ." + message,
-        "robot_name": "sixy",
-        "robot_id": "80459902",
-        "room": "jill",
+        "message": "[" + robotName + "] ." + message,
+        "robot_name": robotName,
+        "robot_id": robotID,
+        "room": chatRoom,
         "secret": "iknowyourelookingatthisthatsfine"
     });
 }
